@@ -1,0 +1,22 @@
+.container{
+    margin: 5rem;
+}
+.employee-table {
+    text-align: center;
+    width: 100%;
+}
+
+.employee-table thead{
+    background-color: #f2f2f2;
+
+}
+
+.employee-table td{
+    border-bottom: 1px solid #dddddd;
+}
+.employee-table td,th{
+    padding:  10px;
+}   
+.employee-table td:first-child{
+    width: 15%;
+}   
