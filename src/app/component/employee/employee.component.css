@@ -20,3 +20,13 @@
 .employee-table td:first-child{
     width: 15%;
 }   
+
+.no-data{
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #2d2e8d;
+    border-radius: 4px;
+    color:  #2d2e8d;
+    width: 40%;
+    margin: 30px auto;
+}

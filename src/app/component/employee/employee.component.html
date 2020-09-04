@@ -17,7 +17,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Experience</label>
                 </div>
-                <select class="custom-select" id="inputGroupSelect01">
+                <select class="custom-select" [(ngModel)]="select_experience" id="inputGroupSelect01" (change)="filterEmployeeListByExperience(select_experience)">
                   <option selected>Select</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
@@ -32,7 +32,7 @@
             <!-- Actual search box -->
             <div class="form-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" [(ngModel)]="search_employee" placeholder="Search by Name" (keyup)="searchEmployeeName(search_employee)">
             </div>
         </div>
     </div>
@@ -63,4 +63,8 @@
             </tr>
         </tbody>
     </table>
+
+    <div class="no-data" *ngIf="!employee_list.length">
+        No Data Found
+    </div>
 </div>    
