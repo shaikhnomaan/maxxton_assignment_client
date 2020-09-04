@@ -15,6 +15,8 @@ export class EmployeeComponent implements OnInit {
   select_department = "";
   select_experience = "";
   search_employee = "";
+  is_name_sorting = false;
+  is_joining_date_sorting = false;
 
   constructor() { }
 
@@ -24,9 +26,6 @@ export class EmployeeComponent implements OnInit {
 
   getDepartmentList(){
     this.department_list =  _.uniqBy(candidate_data, 'department');
-    console.log(this.department_list);
-    
-
   }
 
   filterEmployeeListByDepartrment(department){
@@ -107,9 +106,7 @@ export class EmployeeComponent implements OnInit {
     return Math.abs(Math.round(diff/365.25));
   }
 
-    searchEmployeeName(search_employee) {
-      console.log(search_employee);
-      
+  searchEmployeeName(search_employee) {
       let arr = candidate_data.slice(0);
       if (!search_employee.trim().length) {
         this.employee_list = arr;
@@ -124,5 +121,31 @@ export class EmployeeComponent implements OnInit {
       });
       }
   }
-
+  
+  sortByName(){
+    let arr = candidate_data.slice(0);  //get shadow copy candidate_data
+    this.employee_list = _.sortBy(arr, [function(emp) { return emp.name; }]);
+    this.is_name_sorting = true;
+    this.is_joining_date_sorting = false;
+    console.table( this.employee_list);
+  }
+  
+  
+  sortByJoiningDate(){
+    let arr = candidate_data.slice(0);  //get shadow copy candidate_data
+    this.employee_list = _.sortBy(arr, [function(emp) { return emp.joining_date; }]);
+    this.is_joining_date_sorting = true;
+    this.is_name_sorting = false;
+    console.table( this.employee_list);
+  }
+  
+  revertSorting(sorting_type){
+    if(sorting_type == 'sort_by_name'){}
+    this.employee_list = candidate_data.slice(0);
+    if(this.is_joining_date_sorting ){
+      this.is_joining_date_sorting = false;
+    } else if(this.is_name_sorting){
+      this.is_name_sorting = false;
+    }
+  }
 }

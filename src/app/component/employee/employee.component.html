@@ -41,9 +41,9 @@
         <thead class="thead-light">
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Name &nbsp;<span  *ngIf="is_name_sorting" style="cursor: pointer;" (click)="revertSorting()">&#x2191;</span>  <span *ngIf="!is_name_sorting" style="cursor: pointer;" (click)="sortByName()">&#x2193;</span></th>
                 <th>Department</th>
-                <th>Joining Date</th> 
+                <th>Joining Date  &nbsp; <span  *ngIf="is_joining_date_sorting" style="cursor: pointer;" (click)="revertSorting()">&#x2191;</span> <span *ngIf="!is_joining_date_sorting" style="cursor: pointer;" (click)="sortByJoiningDate()">&#x2193;</span></th> 
             </tr>
         </thead>
         <tbody>
