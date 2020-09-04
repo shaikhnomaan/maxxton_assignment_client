@@ -30,15 +30,39 @@ export class EmployeeComponent implements OnInit {
   }
 
   filterEmployeeListByDepartrment(department){
+    console.log(this.select_experience);
+    
+    let arr = candidate_data.slice(0);
     if(department != "Select"){
-      let arr = candidate_data.slice(0);
       let filtered_department = arr.filter(function(emp) {
          return emp.department == department.department; 
       }.bind(this));
       console.log("filterEmployeeListByDepartrment" ,filtered_department);
-      this.employee_list = (filtered_department).slice(0);
+
+      if(this.select_experience != "Select" && this.select_experience){
+        let temp = filtered_department.filter(function(emp) {
+          let a = moment( [new Date(emp.joining_date).getFullYear(), new Date(emp.joining_date).getMonth()]);
+          let b = moment( [new Date().getFullYear(), new Date().getMonth()]);
+          // console.log((b.diff(a,"years")),emp.name);
+          return (b.diff(a,"years")) > this.select_experience; 
+       }.bind(this));
+       this.employee_list = (temp).slice(0);
+      }else{
+        this.employee_list = (filtered_department).slice(0);
+      }
     }else{
-      this.employee_list = candidate_data;
+      if(this.select_experience != "Select" && this.select_experience){
+        let temp = arr.filter(function(emp) {
+          let a = moment( [new Date(emp.joining_date).getFullYear(), new Date(emp.joining_date).getMonth()]);
+          let b = moment( [new Date().getFullYear(), new Date().getMonth()]);
+          // console.log((b.diff(a,"years")),emp.name);
+          return (b.diff(a,"years")) > this.select_experience; 
+        }.bind(this));
+
+        this.employee_list = temp;
+      }else{
+        this.employee_list = candidate_data;
+      }
     }
   }
 
@@ -66,14 +90,12 @@ export class EmployeeComponent implements OnInit {
       }
     }else{  //if not any experience filter applied
       if(this.select_department != "Select" && this.select_department){   //if department filter is applied
-        console.log("candidate_data", candidate_data , this.select_department);
         let temp = arr.filter(function(emp) {
           return emp.department == this.select_department.department; 
         }.bind(this));
         
         this.employee_list = (temp).slice(0);
       }else{  //if not any department filter is applied
-        
         this.employee_list = candidate_data;
       }
     }
