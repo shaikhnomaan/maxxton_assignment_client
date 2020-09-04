@@ -30,3 +30,12 @@
     width: 40%;
     margin: 30px auto;
 }
+.total-count{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.total-count span{
+    font-size: 12px;
+    font-weight: bold;
+}

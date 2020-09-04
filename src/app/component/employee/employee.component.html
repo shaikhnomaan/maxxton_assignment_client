@@ -64,6 +64,10 @@
         </tbody>
     </table>
 
+    <div class="total-count">
+       <span>Total : </span> {{ employee_list.length }}
+    </div>
+
     <div class="no-data" *ngIf="!employee_list.length">
         No Data Found
     </div>
