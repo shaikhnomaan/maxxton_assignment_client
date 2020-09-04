@@ -43,9 +43,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   filterEmployeeListByExperience(experience){
-    console.log(this.select_department);
     
-    console.log("filterEmployeeListByExperience",experience);
     let arr = candidate_data.slice(0);
     if(experience != "Select"){
       let filtered_department = arr.filter(function(emp) {
@@ -54,8 +52,10 @@ export class EmployeeComponent implements OnInit {
         // console.log((b.diff(a,"years")),emp.name);
         return (b.diff(a,"years")) > experience; 
       }.bind(this));
-
-      if(this.select_department && this.select_department.department != "Select"){ //if department filter is applied
+      
+      if(this.select_department != "Select" && this.select_department){ //if department filter is applied
+        console.log(this.select_department);
+        console.log("filterEmployeeListByExperience",experience);
         let temp = filtered_department.filter(function(emp) {
           return emp.department == this.select_department.department; 
         }.bind(this));
@@ -65,14 +65,14 @@ export class EmployeeComponent implements OnInit {
         this.employee_list = (filtered_department).slice(0);
       }
     }else{  //if not any experience filter applied
-      if(this.select_department && this.select_department.department != "Select"){   //if department filter is applied
+      if(this.select_department != "Select" && this.select_department){   //if department filter is applied
+        console.log("candidate_data", candidate_data , this.select_department);
         let temp = arr.filter(function(emp) {
           return emp.department == this.select_department.department; 
         }.bind(this));
         
         this.employee_list = (temp).slice(0);
       }else{  //if not any department filter is applied
-        console.log(candidate_data);
         
         this.employee_list = candidate_data;
       }
