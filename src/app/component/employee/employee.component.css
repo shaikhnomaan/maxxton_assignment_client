@@ -39,3 +39,6 @@
     font-size: 12px;
     font-weight: bold;
 }
+fa-icon {
+    cursor: pointer;
+}

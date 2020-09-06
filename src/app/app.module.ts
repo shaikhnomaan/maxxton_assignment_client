@@ -6,7 +6,12 @@ import { AppComponent } from './app.component';
 import { EmployeeComponent } from './component/employee/employee.component';
 import { FormsModule } from '@angular/forms';
 
-//import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core'; 
+import { faCoffee  } from '@fortawesome/free-solid-svg-icons';
+library.add(faCoffee);
+
+
 
 @NgModule({
   declarations: [
@@ -16,8 +21,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
-  //  FontAwesomeModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { candidate_data } from '../../data/candidates-data';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { faTrash,faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-employee',
@@ -9,7 +10,9 @@ import * as moment from 'moment';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-  
+  faTrash = faTrash;
+  faSearch = faSearch;
+
   employee_list = candidate_data;
   department_list = [];
   select_department = "";
@@ -17,6 +20,7 @@ export class EmployeeComponent implements OnInit {
   search_employee = "";
   is_name_sorting = false;
   is_joining_date_sorting = false;
+  is_development_department_select = false;
 
   constructor() { }
 
@@ -28,6 +32,7 @@ export class EmployeeComponent implements OnInit {
     this.department_list =  _.uniqBy(candidate_data, 'department');
   }
 
+  // ----------------------------------- filterEmployeeListByDepartrment ---------------------------------
   filterEmployeeListByDepartrment(department){
     console.log(this.select_experience);
     
@@ -65,6 +70,7 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
+  //  ----------------------------------------- filterEmployeeListByExperience -------------------------------
   filterEmployeeListByExperience(experience){
     
     let arr = candidate_data.slice(0);
@@ -99,13 +105,15 @@ export class EmployeeComponent implements OnInit {
       }
     }
   }
-    
+   
+  // ------------------------------------- diffYears ------------------------------------------
   diffYears(dt2, dt1){
     var diff = ((dt2) - (dt1)) / 1000;
     diff /= (60 * 60 * 24);
     return Math.abs(Math.round(diff/365.25));
   }
 
+  // ----------------------------------- searchEmployeeName --------------------------------------
   searchEmployeeName(search_employee) {
       let arr = candidate_data.slice(0);
       if (!search_employee.trim().length) {
@@ -122,6 +130,7 @@ export class EmployeeComponent implements OnInit {
       }
   }
   
+  // ------------------------------------- sortByName ---------------------------------------
   sortByName(){
     let arr = candidate_data.slice(0);  //get shadow copy candidate_data
     this.employee_list = _.sortBy(arr, [function(emp) { return emp.name; }]);
@@ -130,7 +139,7 @@ export class EmployeeComponent implements OnInit {
     console.table( this.employee_list);
   }
   
-  
+  // ---------------------------------- sortByJoiningDate ----------------------------------
   sortByJoiningDate(){
     let arr = candidate_data.slice(0);  //get shadow copy candidate_data
     this.employee_list = _.sortBy(arr, [function(emp) { return emp.joining_date; }]);
@@ -139,6 +148,7 @@ export class EmployeeComponent implements OnInit {
     console.table( this.employee_list);
   }
   
+  // ------------------------------------ revertSorting ----------------------------------
   revertSorting(sorting_type){
     if(sorting_type == 'sort_by_name'){}
     this.employee_list = candidate_data.slice(0);
@@ -147,5 +157,13 @@ export class EmployeeComponent implements OnInit {
     } else if(this.is_name_sorting){
       this.is_name_sorting = false;
     }
+  }
+
+  // -------------------------------------- removeEmplyeeFromList -----------------------------------
+  removeEmplyeeFromList(index){
+    alert("Are you sure you want to delete");
+    this.employee_list.splice(index,1);
+    console.log(index);
+    
   }
 }
